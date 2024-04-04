@@ -33,7 +33,7 @@ html {
 }
 
 /*Index y registro*/
-.bodyIndexRegistro{
+#bodyRegistro{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,15 @@ html {
   background-repeat: no-repeat; 
   background-attachment: fixed;
 } 
-
+#bodyLogin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f4f4;
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed;
+}
 
 .mainIndexRegistro{
     background-color: #d1d5da;

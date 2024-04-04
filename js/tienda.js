@@ -14,14 +14,36 @@ if (!localStorage.getItem('primeraVisita')) {
 //fetch
 //array de servicios en formato json consultado con fetch de manera local
 // Función para mostrar productos
-function mostrarProductos() {
-  fetch("../db/data.json")
-      .then(response => response.json())
-      .then(data => {
-          instrumentos = data;
-          crearHtml(instrumentos);
-      });
+// const API_URL = "https://github.com/Ambiorix565RD/proyecto-Martinez/blob/904391f4d601b3baacdf9861b840d85a33746657/db/data.json";
+
+// function mostrarProductos(){
+//   const getData = async (url) => {
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     instrumentos = data;
+//     crearHtml(instrumentos);
+//   };
+//   getData(API_URL);
+// }
+
+function mostrarProductos(){
+fetch('../db/db.json', { mode: 'no-cors' })
+  .then(response => response.text())
+  .then(data => {
+      instrumentos = data;
+      crearHtml(instrumentos);
+  })
+  .catch(error => console.log('Error:', error));
 }
+
+// function mostrarProductos() {
+//   fetch("../db/db.json")
+//       .then(response => response.json())
+//       .then(data => {
+//           instrumentos = data;
+//           crearHtml(instrumentos);
+//       });
+// }
 
    // Local Storage
 //Verificar si hay un producto en el carrito
@@ -131,33 +153,34 @@ function mostrarCarrito() {
 
 // Función para crear estructura html
 function crearHtml(arr) {
-    const cardInstrumento = document.getElementById("card-instrument-tienda")
-    cardInstrumento.innerHTML = "";
-    //validar qué pasa cuando no recibo ningun array
-    arr.forEach(el => {
-      const { img, nombre, precio, id, descripcion } = el;
-  
-      const html = `<div  class="card-instrument-tienda" data-aos="fade-right"
-      data-aos-offset="200"
-      data-aos-duration="1500"
-      data-aos-easing="ease-in-sine">
-        <img src="../assets/img/${img}" alt="${nombre}"/>
-          <h3>${nombre}</h3>
-          <p>
-          ${descripcion}
-          </p>
-          <p><strong>RD$${precio.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong></p>
-          <div class="logo-button-shopp">
-          <button class="btn btn-primary button-instrument-tienda logo-button-shopp" id="button-instrument-tienda" onclick="btnAgregarCarrito(${id})">Agregar al carrito <img src="../assets/img/shopping.svg" alt="logo-shopping" class="carrito-logo"></button>
-          </div>
-      </div>`;
-      //se la agrego al contenedor
-      cardInstrumento.innerHTML += html;
-    });
+  const cardInstrumento = document.getElementById("card-instrument-tienda")
+  cardInstrumento.innerHTML = "";
+  //validar qué pasa cuando no recibo ningun array
+  let html;
+  for (const el of arr) {
+    const { img, nombre, precio, id, descripcion, } = el;
+
+    html = `<div  class="card-instrument-tienda" data-aos="fade-right"
+    data-aos-offset="200"
+    data-aos-duration="1500"
+    data-aos-easing="ease-in-sine">
+      <img src="./assets/img/${img}" alt="${nombre}"/>
+        <h3>${nombre}</h3>
+        <p>
+        ${descripcion}
+        </p>
+        <p><strong>RD$${precio.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong></p>
+        <div class="logo-button-shopp">
+        <button class="btn btn-primary button-instrument-tienda logo-button-shopp" id="button-instrument-tienda" onclick="btnAgregarCarrito(${id})">Agregar al carrito <img src="../assets/img/shopping.svg" alt="logo-shopping" class="carrito-logo"></button>
+        </div>
+    </div>`;
+    //se la agrego al contenedor
+    cardInstrumento.innerHTML += html;
   }
+}
 
 // Llamar a la función mostrarProductos al cargar la página
-//mostrarProductos();
+mostrarProductos();
 
 
 const inputs =  document.querySelectorAll('input')
@@ -180,10 +203,10 @@ function filtrarInstrumento(arr, filtro) {
 const btnCalcularCarrito = document.querySelector("#btnCalcularCarrito");
 
 btnCalcularCarrito.addEventListener("click", ()=>{
-  
-    total = 0;
-    let total, impuesto, subtotal, descuento, descuentoFinal;
+
     
+    let total, impuesto, subtotal, descuento, descuentoFinal;
+    total = 0;
 
     carrito.forEach(producto => {
         total += producto.precio;
