@@ -118,6 +118,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 guardarEnLS(usuarios);
                 mensaje.innerHTML="";
                 mostrarNotificacion("Usuario agregado exitosamente!");
+
+                //Redirigir al cliente 3 segundos despues que aparezca la notificacion de mostrarNotificacion
+                new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve();
+                    }, 2000);
+                }).then(() => {
+                    location.href ="../index.html";
+                });
             }
         });
     }
