@@ -1,16 +1,7 @@
-//Proyecto Final
+//Proyecto Final Martinez
+
 let carrito = [];
 let instrumentos = [];
-// const instrumentos = [
-//   {id:1, nombre: "Yamaha RDP0F5 HOR Batería acústica Rydeen, Hot Red", precio: 37252.12, descripcion: "Juego de batería de 5 tambores. Color rojo candente" ,img: "bateriaAcustica1.jpg"  },
-//   {id:2, nombre: "RDP2F5 PB Batería acústica Rydeen, Plateado brillante Bombo 22", precio: 39524.41, descripcion: "Juego de batería de 5 tambores. Color plateado escarchado" , img: "bateriaAcustica2.jpg"  },
-//   {id:3, nombre: "DTX452K Bateria electrónica", precio: 70538.32, descripcion: "DTX452K Bateria electrónica" , img: "bateriaElectrica1.jpg"  },
-//   {id:4, nombre: "VAD103 Bateria electroacústica DESING KIT", precio: 203522.86, descripcion: "VAD103 Bateria electrónica" , img: "bateriaElectrica2.jpg"  },
-//   {id:5, nombre: "CCDU141620 Classics custom dual set", precio: 44174.93, descripcion: "Meinl Juegos de platillos" , img: "platillos1.jpg"  },
-//   {id:6, nombre: "CC-141620+18 Set de platillos Custom Classic (5)", precio: 43204.41, descripcion: "Meinl Custom Juegos de platillos" , img: "platillos2.jpg"  },
-//   {id:7, nombre: "TXR5AW Bolillos Forward 5A RAW", precio: 932.20, descripcion: "Bolillos y Brochas" , img: "accesorios1.png"  },
-//   {id:8, nombre: "MDH DRUM Almohadillas amortiguadoras de Miel", descripcion: "Apagadores DRUM HONEY DAMPER PADS" , precio: 710.81, img: "accesorios2.jpg"  },
-// ] ;
 
 // Inicializar conteoDescuento con el valor almacenado en localStorage (si existe)
 let conteoDescuento = localStorage.getItem('conteoDescuento') ? parseInt(localStorage.getItem('conteoDescuento')) : 0;
@@ -26,8 +17,8 @@ if (!localStorage.getItem('primeraVisita')) {
 fetch('https://raw.githubusercontent.com/Ambiorix565RD/proyecto-Martinez/proyectofinal/db/db.json')
   .then(response => response.json())
   .then(data => {
-    instrumentos = data; // Asignar los datos al array instrumentos
-    mostrarProductos();  // Llamar a la función para mostrar las tarjetas de productos
+    instrumentos = data; 
+    mostrarProductos();  
   })
   .catch(error => {
     console.error('Error:', error);
