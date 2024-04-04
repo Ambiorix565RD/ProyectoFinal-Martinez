@@ -147,7 +147,7 @@ function mostrarCarrito() {
 
       const html = `
           <div class="carrito-item">
-              <img src="./assets/img/${img}" alt="${nombre}" />
+              <img src="../assets/img/${img}" alt="${nombre}" />
               <h4>${nombre}</h4>
               <p>RD$${precio.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
               <button class="btn btn-primary" id="btneliminar" onclick="btnEliminarCarrito(${id})">Eliminar</button>
@@ -171,7 +171,7 @@ function crearHtml(arr) {
       data-aos-offset="200"
       data-aos-duration="1500"
       data-aos-easing="ease-in-sine">
-        <img src="./assets/img/${img}" alt="${nombre}"/>
+        <img src="../assets/img/${img}" alt="${nombre}"/>
           <h3>${nombre}</h3>
           <p>
           ${descripcion}
