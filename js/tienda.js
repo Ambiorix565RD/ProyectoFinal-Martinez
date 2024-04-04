@@ -1,19 +1,26 @@
-//Preentrega 3
+//Proyecto Final
 let carrito = [];
-
+let instrumentos =[]
+// Inicializar conteoDescuento con el valor almacenado en localStorage (si existe)
+let conteoDescuento = localStorage.getItem('conteoDescuento') ? parseInt(localStorage.getItem('conteoDescuento')) : 0;
 const nombreUsuario = localStorage.getItem("nombreUsuario");
+
 // Comando para mostrar el sweet alert de visita una sola vez.
 if (!localStorage.getItem('primeraVisita')) {
-
   Swal.fire("¡¡Bienvenido " + nombreUsuario +  " a la mejor tienda de instrumentos musicales!! \n\nAquí encontrarás: \n\nBaterías acústicas, baterías eléctricas, platillos y accesorios. \n\nTodos al mejor precio del mercado. \n\n ¡¡Tenemos interesantes DESCUENTOS para aquellos que elijan 3 productos o más, así que...!! \n\n¡¡Ven y descúbrelo!!");
   localStorage.setItem('primeraVisita', 'true');
 }
 
-//Funcion para que funcione el local Storage
-function mostrarProductos(){
-  const cardInstrumento = document.getElementById("card-instrument-tienda")
-  cardInstrumento.innerHTML = "";
-  crearHtml(instrumentos);
+//fetch
+//array de servicios en formato json consultado con fetch de manera local
+// Función para mostrar productos
+function mostrarProductos() {
+  fetch("../db/data.json")
+      .then(response => response.json())
+      .then(data => {
+          instrumentos = data;
+          crearHtml(instrumentos);
+      });
 }
 
    // Local Storage
@@ -23,110 +30,25 @@ if (localStorage.getItem('carrito')) {
  mostrarCarrito();  // Actualizar el HTML del carrito
 } 
 
-//fetch
-//array de servicios en formato json consultado con fetch de manera local
-let instrumentos =[]
-fetch("../db/data.json")
-.then( (response) => response.json() )
-.then( (data)=> {
-  instrumentos = (data)
-  crearHtml(instrumentos)
-})
-
-// const instrumentos = [
-//     {id:1, nombre: "Yamaha RDP0F5 HOR Batería acústica Rydeen, Hot Red", precio: 37252.12, descripcion: "Juego de batería de 5 tambores. Color rojo candente" ,img: "bateriaAcustica1.jpg"  },
-//     {id:2, nombre: "RDP2F5 PB Batería acústica Rydeen, Plateado brillante Bombo 22", precio: 39524.41, descripcion: "Juego de batería de 5 tambores. Color plateado escarchado" , img: "bateriaAcustica2.jpg"  },
-//     {id:3, nombre: "DTX452K Bateria electrónica", precio: 70538.32, descripcion: "DTX452K Bateria electrónica" , img: "bateriaElectrica1.jpg"  },
-//     {id:4, nombre: "VAD103 Bateria electroacústica DESING KIT", precio: 203522.86, descripcion: "VAD103 Bateria electrónica" , img: "bateriaElectrica2.jpg"  },
-//     {id:5, nombre: "CCDU141620 Classics custom dual set", precio: 44174.93, descripcion: "Meinl Juegos de platillos" , img: "platillos1.jpg"  },
-//     {id:6, nombre: "CC-141620+18 Set de platillos Custom Classic (5)", precio: 43204.41, descripcion: "Meinl Custom Juegos de platillos" , img: "platillos2.jpg"  },
-//     {id:7, nombre: "TXR5AW Bolillos Forward 5A RAW", precio: 932.20, descripcion: "Bolillos y Brochas" , img: "accesorios1.png"  },
-//     {id:8, nombre: "MDH DRUM Almohadillas amortiguadoras de Miel", descripcion: "Apagadores DRUM HONEY DAMPER PADS" , precio: 710.81, img: "accesorios2.jpg"  },
-// ] ;
-
 // Agregar productos al carrito
 function btnCarrito(id) {
-  // Buscar el producto en el array de instrumentos
-  const producto = instrumentos.find(item => item.id === id);
-  
-  //verificamos y actualizamos al carrito
-  if (producto) {
-
-    carrito.push(producto);
-    // Guardar el carrito en localStorage
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    // Incrementar el conteo de descuento solo cuando se agrega un producto
-    conteoDescuento += 1;
-    //Para que el conteo se guarde en el localstorage
-    localStorage.setItem('conteoDescuento', conteoDescuento.toString());
-    mostrarCarrito();
-
-    // Asincronia para que tarde en reflejar la operacion realizada por el cliente con el boton agregar carrito
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 1000); 
-    });
-    
-  } else {
-      console.error("Producto no encontrado");
-  }
-}
-
-// Modificación en el evento del botón agregar al carrito
-async function btnAgregarCarrito(id) {
-  //Manejar las respuesta del resultado de la promesa
-  await  btnCarrito(id)
-    .then(mensaje => {
-      // Mostrar notificación Toastify
-      mostrarNotificacion("Producto agregado al carrito!");
-    })
-    .catch(error => {
-      console.error(error);
-      mostrarNotificacion("Error al agregar producto al carrito.");
-    });
-}
-
-//Funcion para quitar un producto del carrito.
-function opcionEliminar(id) {
-  // Busca el índice del producto con el id dado
-  const index = carrito.findIndex(producto => producto.id === id);
-  
-  if (index !== -1) {
-
-    // Para decrementar el valor de conteoDescuento
-    conteoDescuento -= 1;
-    localStorage.setItem('conteoDescuento', conteoDescuento.toString());
-    // Elimina el producto del array
-    carrito.splice(index, 1);  
-    localStorage.setItem('carrito', JSON.stringify(carrito)); 
-    mostrarCarrito(); 
-
-    // Asincronia para que tarde en reflejar la operacion realizada por el cliente con el boton eliminar carrito
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
-    });
-
-  } else {
-    console.error("Producto no encontrado");  
-  }
-  mostrarCarrito(); 
-}
-
-// Modificación en el evento del botón eliminar del carrito
-async function btnEliminarCarrito(id) {
- //Esto hace que espere a que se complete la funcion asincronica eliminar carrito antes de continuar
- await opcionEliminar(id)
- .then(mensaje => {
-   // Mostrar notificación Toastify
-    mostrarNotificacion("Producto eliminado del carrito!");
- })
- .catch(error => {
-   console.error(error);
-   mostrarNotificacion("Error al eliminar producto del carrito.");
- });
+  return new Promise((resolve, reject) => {
+    // Buscar el producto en el array de instrumentos
+    const producto = instrumentos.find(item => item.id === id);
+    //verificamos y actualizamos al carrito
+    if (producto) {
+      carrito.push(producto);
+      // Guardar el carrito en localStorage
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      // Incrementar el conteo de descuento solo cuando se agrega un producto
+      conteoDescuento += 1;
+      localStorage.setItem('conteoDescuento', conteoDescuento.toString());
+      mostrarCarrito();
+      resolve();
+    } else {
+      reject("Producto no encontrado");
+    }
+  });
 }
 
 //Funcion para mostrar notificacion Toastify
@@ -135,6 +57,55 @@ function mostrarNotificacion(mensaje) {
     text: mensaje,
     duration: 3000
   }).showToast();
+}
+
+// Modificación en el evento del botón agregar al carrito
+async function btnAgregarCarrito(id) {
+  //Manejar las respuesta del resultado de la promesa
+  await btnCarrito(id)
+      .then(() => {
+          // Mostrar notificación Toastify
+          mostrarNotificacion("Producto agregado al carrito!");
+      })
+      .catch(error => {
+          console.error(error);
+          mostrarNotificacion("Error al agregar producto al carrito.");
+      });
+}
+
+//Funcion para quitar un producto del carrito.
+function opcionEliminar(id) {
+  // Asincronia para que tarde en reflejar la operacion realizada por el cliente con el boton eliminar carrito
+  return new Promise((resolve, reject) => {
+    // Busca el índice del producto con el id dado
+    const index = carrito.findIndex(producto => producto.id === id);
+    if (index !== -1) {
+      // Para decrementar el valor de conteoDescuento
+      conteoDescuento -= 1;
+      localStorage.setItem('conteoDescuento', conteoDescuento.toString());
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      // Elimina el producto del array
+      mostrarCarrito();
+      resolve();
+    } else {
+      reject("Producto no encontrado");
+    }
+  });
+}
+
+// Modificación en el evento del botón eliminar del carrito
+async function btnEliminarCarrito(id) {
+  //Esto hace que espere a que se complete la funcion asincronica eliminar carrito antes de continuar
+  await opcionEliminar(id)
+      .then(() => {
+        // Mostrar notificación Toastify
+          mostrarNotificacion("Producto eliminado del carrito!");
+      })
+      .catch(error => {
+          console.error(error);
+          mostrarNotificacion("Error al eliminar producto del carrito.");
+      });
 }
 
 //Para mostrar los productos del carrito en el html
@@ -163,11 +134,10 @@ function crearHtml(arr) {
     const cardInstrumento = document.getElementById("card-instrument-tienda")
     cardInstrumento.innerHTML = "";
     //validar qué pasa cuando no recibo ningun array
-    let html;
-    for (const el of arr) {
-      const { img, nombre, precio, id, descripcion, } = el;
+    arr.forEach(el => {
+      const { img, nombre, precio, id, descripcion } = el;
   
-      html = `<div  class="card-instrument-tienda" data-aos="fade-right"
+      const html = `<div  class="card-instrument-tienda" data-aos="fade-right"
       data-aos-offset="200"
       data-aos-duration="1500"
       data-aos-easing="ease-in-sine">
@@ -183,22 +153,22 @@ function crearHtml(arr) {
       </div>`;
       //se la agrego al contenedor
       cardInstrumento.innerHTML += html;
-    }
+    });
   }
 
 // Llamar a la función mostrarProductos al cargar la página
-mostrarProductos();
+//mostrarProductos();
 
 
 const inputs =  document.querySelectorAll('input')
 const inputSearch = inputs [0];
-//Funciones de búsqueda
-function buscarInstrumento(arr, filtro) {
-  const encontrado = arr.find((el) => {
-    return el.nombre.toLowerCase().includes(filtro.toLowerCase());
-  });
-  return encontrado;
-}
+//buscador de servicios por barra de busqueda de la pagina
+inputSearch.addEventListener('keyup', ()=>{
+  const encontrado = filtrarInstrumento(instrumentos, inputSearch.value);
+  crearHtml(encontrado);
+});
+
+//Funcion de búsqueda
 function filtrarInstrumento(arr, filtro) {
   const filtrado = arr.filter((el) => {
     return el.nombre.toLowerCase().includes(filtro.toLowerCase());
@@ -206,21 +176,14 @@ function filtrarInstrumento(arr, filtro) {
   return filtrado;
 }
 
-//buscador de servicios por barra de busqueda de la pagina
-inputSearch.addEventListener('keyup', ()=>{
-
-  const encontrado = filtrarInstrumento(instrumentos, inputSearch.value)
-  crearHtml(encontrado)
-})
-
 //Para hacer funcionar el boton de calcular el total
 const btnCalcularCarrito = document.querySelector("#btnCalcularCarrito");
-// Inicializar conteoDescuento con el valor almacenado en localStorage (si existe)
-let conteoDescuento = localStorage.getItem('conteoDescuento') ? parseInt(localStorage.getItem('conteoDescuento')) : 0;
+
 btnCalcularCarrito.addEventListener("click", ()=>{
-    
-    let total, impuesto, subtotal, descuento, descuentoFinal;
+  
     total = 0;
+    let total, impuesto, subtotal, descuento, descuentoFinal;
+    
 
     carrito.forEach(producto => {
         total += producto.precio;
