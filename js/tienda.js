@@ -11,21 +11,6 @@ if (!localStorage.getItem('primeraVisita')) {
   localStorage.setItem('primeraVisita', 'true');
 }
 
-//fetch
-//array de servicios en formato json consultado con fetch de manera local
-// Función para mostrar productos
-// const API_URL = "https://github.com/Ambiorix565RD/proyecto-Martinez/blob/904391f4d601b3baacdf9861b840d85a33746657/db/data.json";
-
-// function mostrarProductos(){
-//   const getData = async (url) => {
-//     const response = await fetch(url);
-//     const data = await response.json();
-//     instrumentos = data;
-//     crearHtml(instrumentos);
-//   };
-//   getData(API_URL);
-// }
-
 function mostrarProductos(){
 fetch('../db/db.json', { mode: 'no-cors' })
   .then(response => response.text())
