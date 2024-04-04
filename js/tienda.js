@@ -15,20 +15,26 @@ if (!localStorage.getItem('primeraVisita')) {
 //array de servicios en formato json consultado con fetch de manera local
 // Función para mostrar productos
 function mostrarProductos() {
-  fetch("../data.json")
+  fetch("https://ambiorix565rd.github.io/data.json")
       .then(response => {
           if (!response.ok) {
-              throw new Error('Network response was not ok');
+              throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          return response.json();
+          return response.text(); // Leer el cuerpo de la respuesta como texto
       })
-      .then(data => {
-          instrumentos = data;
-          crearHtml(instrumentos);
+      .then(text => {
+          try {
+              const data = JSON.parse(text); // Intentar parsear el texto como JSON
+              instrumentos = data;
+              crearHtml(instrumentos);
+          } catch (error) {
+              console.error('Error parsing JSON:', error);
+              mostrarNotificacion("Error al cargar los productos. Por favor, intenta nuevamente más tarde.");
+          }
       })
       .catch(error => {
-          console.error('Error fetching data:', error);
-          mostrarNotificacion("Error al cargar los productos. Por favor, intenta nuevamente más tarde.");
+          console.error('Fetch error:', error);
+          mostrarNotificacion(`Error fetching data: ${error.message}`);
       });
 }
 
