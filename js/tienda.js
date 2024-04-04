@@ -16,12 +16,22 @@ if (!localStorage.getItem('primeraVisita')) {
 // Función para mostrar productos
 function mostrarProductos() {
   fetch("../db/data.json")
-      .then(response => response.json())
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
       .then(data => {
           instrumentos = data;
           crearHtml(instrumentos);
+      })
+      .catch(error => {
+          console.error('Error fetching data:', error);
+          mostrarNotificacion("Error al cargar los productos. Por favor, intenta nuevamente más tarde.");
       });
 }
+
 
    // Local Storage
 //Verificar si hay un producto en el carrito
