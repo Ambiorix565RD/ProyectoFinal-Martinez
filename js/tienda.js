@@ -18,19 +18,26 @@ function mostrarProductos() {
   fetch("../db/data.json")
       .then(response => {
           if (!response.ok) {
-              throw new Error('Network response was not ok');
+              throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          return response.json();
+          return response.text(); // Leer el cuerpo de la respuesta como texto
       })
-      .then(data => {
-          instrumentos = data;
-          crearHtml(instrumentos);
+      .then(text => {
+          try {
+              const data = JSON.parse(text); // Intentar parsear el texto como JSON
+              instrumentos = data;
+              crearHtml(instrumentos);
+          } catch (error) {
+              console.error('Error parsing JSON:', error);
+              mostrarNotificacion("Error al cargar los productos. Por favor, intenta nuevamente más tarde.");
+          }
       })
       .catch(error => {
-          console.error('Error fetching data:', error);
+          console.error('Fetch error:', error);
           mostrarNotificacion("Error al cargar los productos. Por favor, intenta nuevamente más tarde.");
       });
 }
+
 
 
    // Local Storage
