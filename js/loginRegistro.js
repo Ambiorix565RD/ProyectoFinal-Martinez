@@ -18,22 +18,25 @@ document.addEventListener("DOMContentLoaded", function() {
     
     function loginRegistro(usuarios) {
         
-        let usuarioEncontrado = usuarios.find((usuario)=>{
-            return usuarioLogin.value ==  usuario.usuario  && contraseniaLogin.value == usuario.contrasena ;
-            
-        });
-
         //verificar que el obejto usuario encontrado no sea null o undefined
         if (!usuarios || !usuarioLogin.value || !contraseniaLogin.value) {
             mensaje.innerHTML = "Por favor, ingresa tus credenciales";
             return;
 
-        }else if (usuarioEncontrado){
+        }
+
+        let usuarioEncontrado = usuarios.find((usuario)=>{
+            return usuarioLogin.value ==  usuario.usuario  && contraseniaLogin.value == usuario.contrasena ;
+            
+        });
+
+
+         if (usuarioEncontrado){
             localStorage.setItem('nombreUsuario', usuarioEncontrado.nombre); // Guardar el nombre del usuario en localStorage
             console.log("Nombre de usuario guardado en localStorage:", localStorage.getItem('nombreUsuario'));
             location.href ="./pages/tienda.html";
 
-        }else if (!usuarioEncontrado){
+        }else{
            mensaje.innerHTML = "Usuario no encontrado";
         }
     }
@@ -91,23 +94,30 @@ document.addEventListener("DOMContentLoaded", function() {
         }).showToast();
       }
 
-    //Evento para el formulario de registro
+    // Función para validar el nombre
+    function esNombreValido(nombre) {
+        const regex = /^[a-zA-Z\sáéíóúÁÉÍÓÚ]+$/; 
+        return regex.test(nombre);
+    }
+
+    // Evento para el formulario de registro
     if(registroFormulario) {
         registroFormulario.addEventListener("submit", (e)=>{
             e.preventDefault();
             const nuevoUsuario = new Usuario(nombre.value, usuarioRegistro.value, correoRegistro.value, contraseniaRegistro.value);
             
-            if (!nombre.value || !usuarioRegistro.value || !correoRegistro.value || !contraseniaRegistro.value) {
-                mensaje.innerHTML = "Por favor, completa todos los campos";
+            // Validar el nombre
+            if (!nombre.value || !esNombreValido(nombre.value) || !usuarioRegistro.value || !correoRegistro.value || !contraseniaRegistro.value) {
+                mensaje.innerHTML = "Por favor, completa todos los campos correctamente";
                 return;
             }
-            else{
-                    //Pusheo los datos ingresados por el usuario
-                    guardarUsuario(nuevoUsuario);
-                    //Lo guardo en el localStorage al array de usuarios
-                    guardarEnLS(usuarios);
-                    
-                     mostrarNotificacion("Usuario agregado existosamente!");
+            else {
+                // Pusheo los datos ingresados por el usuario
+                guardarUsuario(nuevoUsuario);
+                // Lo guardo en el localStorage al array de usuarios
+                guardarEnLS(usuarios);
+                mensaje.innerHTML="";
+                mostrarNotificacion("Usuario agregado exitosamente!");
             }
         });
     }
