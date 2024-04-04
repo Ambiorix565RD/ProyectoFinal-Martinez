@@ -26,10 +26,10 @@ if (localStorage.getItem('carrito')) {
 //fetch
 //array de servicios en formato json consultado con fetch de manera local
 let instrumentos =[]
-fetch("./db/data.json")
-.then(response => response.json())
-.then(data=>{
-  instrumentos = data
+fetch("../db/data.json")
+.then( (response) => response.json() )
+.then( (data)=> {
+  instrumentos = (data)
   crearHtml(instrumentos)
 })
 
