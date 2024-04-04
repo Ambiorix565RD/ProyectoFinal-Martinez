@@ -157,7 +157,7 @@ function crearHtml(arr) {
   }
 
 // Llamar a la función mostrarProductos al cargar la página
-//mostrarProductos();
+mostrarProductos();
 
 
 const inputs =  document.querySelectorAll('input')
@@ -180,10 +180,8 @@ function filtrarInstrumento(arr, filtro) {
 const btnCalcularCarrito = document.querySelector("#btnCalcularCarrito");
 
 btnCalcularCarrito.addEventListener("click", ()=>{
-  
-    total = 0;
     let total, impuesto, subtotal, descuento, descuentoFinal;
-    
+    total = 0;
 
     carrito.forEach(producto => {
         total += producto.precio;
