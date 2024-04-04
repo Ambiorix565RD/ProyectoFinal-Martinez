@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }else if (usuarioEncontrado){
             localStorage.setItem('nombreUsuario', usuarioEncontrado.nombre); // Guardar el nombre del usuario en localStorage
             console.log("Nombre de usuario guardado en localStorage:", localStorage.getItem('nombreUsuario'));
-            location.href ="../pages/tienda.html";
+            location.href ="./pages/tienda.html";
 
         }else if (!usuarioEncontrado){
            mensaje.innerHTML = "Usuario no encontrado";
