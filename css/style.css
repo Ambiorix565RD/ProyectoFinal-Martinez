@@ -101,10 +101,12 @@ html {
     grid-template-columns: repeat(4, 20vw);
     text-align: center;
     align-items: end;
-    justify-content: start;
+    justify-content: center;
+    justify-items: center;
     gap: 4rem;
     margin: 3rem;
-  }
+  } 
+
   .main-tienda section .div-instrument-tienda .card-instrument-tienda {
     width: 320px;
     transition: 0.5S;
@@ -298,7 +300,8 @@ footer section {
     grid-template-columns: repeat(3, 26vw);
     text-align: center;
     align-items: end;
-    justify-content: start;
+    justify-content: center;
+    justify-items: center;
     gap: 4rem;
     margin: 3rem;
   }
@@ -473,7 +476,8 @@ footer section {
     grid-template-columns: repeat(2, 40vw);
     text-align: center;
     align-items: end;
-    justify-content: start;
+    justify-content: center;
+    justify-items: center;
     gap: 4rem;
     margin: 0vw 12vw 12vw 12vw;
   }
@@ -665,7 +669,8 @@ footer section {
     grid-template-columns: repeat(1, 100%);
     text-align: center;
     align-items: end;
-    justify-content: space-around;
+    justify-content: center;
+    justify-items: center;
     gap: 4rem;
     margin: 0vw 10vw 10vw 10vw;
   }
