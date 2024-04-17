@@ -122,10 +122,11 @@ html {
     border-radius: 5%;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp .button-instrument-tienda {
-    background-color: #0048b1;
+    background-color:#3085d6;
+    border-radius: 25px;
     font-family: "Andreas";
     font-weight: 700;
-    padding: 15px;
+    padding: 10px 30px 10px 30px;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp img {
     height: 25px;
@@ -157,21 +158,26 @@ html {
   }
   #btnCalcularCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #3085d6;
+    padding: 10px 30px 10px 30px;
+    border-radius: 25px;
     font-size: 0.9vw;
   }
   #btnVaciarCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border-radius: 25px;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    padding: 10px 35px 10px 35px;
     font-size: 0.9vw;
   }
 
   #btneliminar{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    border-radius: 25px;
+    padding: 10px 35px 10px 35px;
   }
 
   /*margenes*/
@@ -317,10 +323,11 @@ footer section {
     border-radius: 5%;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp .button-instrument-tienda {
-    background-color: #0048b1;
+    background-color:#3085d6;
+    border-radius: 25px;
     font-family: "Andreas";
     font-weight: 700;
-    padding: 15px;
+    padding: 10px 30px 10px 30px;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp img {
     height: 25px;
@@ -357,19 +364,25 @@ footer section {
   }
   #btnCalcularCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #3085d6;
+    padding: 15px 35px 15px 35px;
+    border-radius: 30px;
+
   }
   #btnVaciarCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border-radius: 25px;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    padding: 15px 35px 15px 35px;
   }
 
   #btneliminar{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    border-radius: 25px;
+    padding: 10px 35px 10px 35px;
   }
 
   .botonCarrito{
@@ -485,10 +498,12 @@ footer section {
     border-radius: 5%;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp .button-instrument-tienda {
-    background-color: #0048b1;
+
+    background-color:#3085d6;
+    border-radius: 25px;
     font-family: "Andreas";
     font-weight: 700;
-    padding: 13px;
+    padding: 13px 33px 13px 33px;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp img {
     height: 25px;
@@ -524,19 +539,26 @@ footer section {
   }
   #btnCalcularCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #3085d6;
+    padding: 15px 35px 15px 35px;
+    border-radius: 30px;
+    font-size: 2vw;
   }
   #btnVaciarCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border-radius: 25px;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    padding: 15px 35px 15px 35px;
+    font-size: 2vw;
   }
 
   #btneliminar{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    border-radius: 25px;
+    padding: 10px 35px 10px 35px;
   }
 
   .botonCarrito{
@@ -667,10 +689,11 @@ footer section {
     border-radius: 5%;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp .button-instrument-tienda {
-    background-color: #0048b1;
+    background-color:#3085d6;
+    border-radius: 25px;
     font-family: "Andreas";
     font-weight: 700;
-    padding: 13px;
+    padding: 13px 33px 13px 33px;
   }
   .main-tienda section .div-instrument-tienda .card-instrument-tienda .logo-button-shopp img {
     height: 25px;
@@ -706,21 +729,26 @@ footer section {
   }
   #btnCalcularCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #3085d6;
+    padding: 15px 35px 15px 35px;
+    border-radius: 30px;
     font-size: 4vw;
   }
   #btnVaciarCarrito{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border-radius: 25px;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    padding: 15px 35px 15px 35px;
     font-size: 4vw;
   }
 
   #btneliminar{
     text-align: center;
-    background-color: #0048b1;
-    padding: 15px;
+    background-color: #D32F2F;
+    border: var(--bs-btn-border-width) solid #f8f9fa;
+    border-radius: 25px;
+    padding: 10px 35px 10px 35px;
   }
 
   .botonCarrito{

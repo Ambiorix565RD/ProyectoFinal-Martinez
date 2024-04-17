@@ -201,9 +201,14 @@ btnCalcularCarrito.addEventListener("click", ()=>{
     subtotal = total - impuesto;
 
     if(carrito.length == 0){
-
-      Swal.fire("El carrito está vacío!", "", "error");
-      return;
+      
+      Swal.fire({
+        title: "¡El carrito está vacío!",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+      });
+      
+        return;
 
     } else if(carrito.length >= 3) {
         descuento = (10 / 100) * subtotal;
@@ -227,7 +232,13 @@ btnCalcularCarrito.addEventListener("click", ()=>{
               //Para que se reinicie el conteo cuando se realice la compra y se vacie el carrito.
               conteoDescuento = 0;
               
-                Swal.fire("¡Gracias por su compra " + nombreUsuario + "!", "", "success");
+              Swal.fire({
+                title: '¡Gracias por su compra ' + nombreUsuario + '!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: "#3085d6",
+              });
+
                 // Vaciar el carrito
                 carrito = [];
                 
@@ -236,9 +247,7 @@ btnCalcularCarrito.addEventListener("click", ()=>{
                 
                 // Actualizar la vista del carrito
                 mostrarCarrito();
-            } else if (result.isDenied) {
-                Swal.fire("Continue con la compra", "", "info");
-            }
+            } 
         });
         
     } else {
@@ -257,7 +266,14 @@ btnCalcularCarrito.addEventListener("click", ()=>{
             if (result.isConfirmed) {
                 //Para que se reinicie el conteo cuando se realice la compra y se vacie el carrito.
                 conteoDescuento = 0;
-                Swal.fire("¡Gracias por su compra " + nombreUsuario + "!", "", "success");
+
+                Swal.fire({
+                  title: '¡Gracias por su compra ' + nombreUsuario + '!',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: "#3085d6",
+                });
+                
                 // Vaciar el carrito
                 carrito = [];
                 
@@ -266,9 +282,7 @@ btnCalcularCarrito.addEventListener("click", ()=>{
                 
                 // Actualizar la vista del carrito
                 mostrarCarrito();
-            } else if (result.isDenied) {
-                Swal.fire("Continue con la compra", "", "info");
-            }
+            } 
         });
     }
 });
@@ -278,7 +292,12 @@ const btnVaciarCarrito = document.querySelector("#btnVaciarCarrito");
 btnVaciarCarrito.addEventListener("click", ()=>{
    
   if(carrito.length == 0){
-    Swal.fire("¡El carrito ya se encuentra vacío!", "", "error");
+    Swal.fire({
+      title: "¡El carrito ya se encuentra vacío!",
+      icon: "error",
+      confirmButtonColor: "#3085d6",
+    });
+    
       return;
   }
   else{
@@ -304,12 +323,10 @@ btnVaciarCarrito.addEventListener("click", ()=>{
           title: 'Carrito Vacío',
           text: 'El carrito ha sido vaciado correctamente.',
           icon: 'success',
-          confirmButtonText: 'Aceptar'
-      });
-      } else if (result.isDenied) {
-        Swal.fire("Continue con la compra", "", "info");
-      }
-
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: "#3085d6",
+        });
+      } 
     });
   }
 })
